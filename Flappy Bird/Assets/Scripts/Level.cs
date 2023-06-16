@@ -1,3 +1,4 @@
+using CodeMonkey;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class Level : MonoBehaviour
 
     public static Level GetInstance()
     {
-        return instance; 
+        return instance;
     }
 
     private List<Pipe> pipeList;
@@ -24,6 +25,7 @@ public class Level : MonoBehaviour
     private float pipeSpawnTimer;
     private float pipeSpawnTimerMax;
     private float gapSize;
+    private State state;
 
     public enum Difficulty
     {
@@ -33,18 +35,44 @@ public class Level : MonoBehaviour
         Impossible,
     }
 
+    private enum State
+    {
+        Playing,
+        BirdDead,
+    }
+
     private void Awake()
     {
         instance = this;
         pipeList = new List<Pipe>();
         pipeSpawnTimerMax = 1f;
         SetDifficulty(Difficulty.Easy);
+        state = State.Playing;
+    }
+
+    private void Start()
+    {
+        Bird.GetInstance().OnDied += Bird_OnDied;
+    }
+
+    private void Bird_OnDied(object sender, System.EventArgs e)
+    {
+        //CMDebug.TextPopupMouse("Dead!");
+        state = State.BirdDead;
+
+        FunctionTimer.Create(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        }, 1f);
     }
 
     private void Update()
     {
-        HandlePipeMovement();
-        HandlePipeSpawning();
+        if (state == State.Playing)
+        {
+            HandlePipeMovement();
+            HandlePipeSpawning();
+        }
     }
 
     private void HandlePipeSpawning()
@@ -89,19 +117,19 @@ public class Level : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Easy: 
+            case Difficulty.Easy:
                 gapSize = 50f;
                 pipeSpawnTimerMax = 1.2f;
                 break;
-            case Difficulty.Medium: 
+            case Difficulty.Medium:
                 gapSize = 40f;
                 pipeSpawnTimerMax = 1.1f;
                 break;
-            case Difficulty.Hard: 
+            case Difficulty.Hard:
                 gapSize = 34f;
                 pipeSpawnTimerMax = 1.0f;
                 break;
-            case Difficulty.Impossible: 
+            case Difficulty.Impossible:
                 gapSize = 25f;
                 pipeSpawnTimerMax = .9f;
                 break;
