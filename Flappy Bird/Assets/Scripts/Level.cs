@@ -66,11 +66,6 @@ public class Level : MonoBehaviour
     {
         //CMDebug.TextPopupMouse("Dead!");
         state = State.BirdDead;
-
-        FunctionTimer.Create(() =>
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
-        }, 1f);
     }
 
     private void Update()
