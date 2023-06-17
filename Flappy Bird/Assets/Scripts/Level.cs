@@ -37,6 +37,7 @@ public class Level : MonoBehaviour
 
     private enum State
     {
+        WaitingToStart,
         Playing,
         BirdDead,
     }
@@ -47,12 +48,18 @@ public class Level : MonoBehaviour
         pipeList = new List<Pipe>();
         pipeSpawnTimerMax = 1f;
         SetDifficulty(Difficulty.Easy);
-        state = State.Playing;
+        state = State.WaitingToStart;
     }
 
     private void Start()
     {
         Bird.GetInstance().OnDied += Bird_OnDied;
+        Bird.GetInstance().OnStartedPlaying += Bird_OnStartedPlaying;
+    }
+
+    private void Bird_OnStartedPlaying(object sender, System.EventArgs e)
+    {
+        state = State.Playing;
     }
 
     private void Bird_OnDied(object sender, System.EventArgs e)
