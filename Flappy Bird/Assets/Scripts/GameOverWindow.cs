@@ -2,6 +2,7 @@ using CodeMonkey.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,11 +21,13 @@ public class GameOverWindow : MonoBehaviour
         {
             Loader.Load(Loader.Scene.GameScene);
         };
+        retryBtnObj.GetComponent<Button_UI>().AddButtonSounds();
 
         mainMenuBtnObj.GetComponent<Button_UI>().ClickFunc = () =>
         {
             Loader.Load(Loader.Scene.MainMenu);
         };
+        mainMenuBtnObj.GetComponent<Button_UI>().AddButtonSounds();
     }
 
     private void Start()

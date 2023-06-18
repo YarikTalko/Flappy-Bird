@@ -13,10 +13,12 @@ public class MainMenuWindow : MonoBehaviour
         {
             Loader.Load(Loader.Scene.GameScene);
         };
-        
+        playBtnObj.GetComponent<Button_UI>().AddButtonSounds();
+
         quitBtnObj.GetComponent<Button_UI>().ClickFunc= () => 
         { 
             Application.Quit();
         };
+        quitBtnObj.GetComponent<Button_UI>().AddButtonSounds();
     }
 }

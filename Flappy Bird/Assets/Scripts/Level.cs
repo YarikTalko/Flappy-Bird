@@ -20,7 +20,7 @@ public class Level : MonoBehaviour
     }
 
     private List<Pipe> pipeList;
-    private int pipeIPassedCount;
+    private int pipesPassedCount;
     private int pipesSpawned;
     private float pipeSpawnTimer;
     private float pipeSpawnTimerMax;
@@ -103,7 +103,8 @@ public class Level : MonoBehaviour
             pipe.Move();
             if (isToTheRightOfBird && pipe.GetXPosition() <= BIRD_X_POSITION && pipe.IsBottom())
             {
-                pipeIPassedCount++;
+                pipesPassedCount++;
+                SoundManager.PlaySound(SoundManager.Sound.Score);
             }
 
             if (pipe.GetXPosition() < PIPE_DESTROY_X_POSITION)
@@ -204,7 +205,7 @@ public class Level : MonoBehaviour
 
     public int GetPipesPassedCount()
     {
-        return pipeIPassedCount;
+        return pipesPassedCount;
     }
 
     private class Pipe
