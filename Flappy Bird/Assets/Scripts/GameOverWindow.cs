@@ -7,17 +7,23 @@ using UnityEngine.UI;
 
 public class GameOverWindow : MonoBehaviour
 {
-    [SerializeField] private GameObject scoreTextObject;
-    [SerializeField] private GameObject retryBtnObject;
+    [SerializeField] private GameObject scoreTextObj;
+    [SerializeField] private GameObject retryBtnObj;
+    [SerializeField] private GameObject mainMenuBtnObj;
     private TMP_Text scoreText;
 
     private void Awake()
     {
-        scoreText = scoreTextObject.GetComponent<TMP_Text>();
+        scoreText = scoreTextObj.GetComponent<TMP_Text>();
 
-        retryBtnObject.GetComponent<Button_UI>().ClickFunc = () =>
+        retryBtnObj.GetComponent<Button_UI>().ClickFunc = () =>
         {
             Loader.Load(Loader.Scene.GameScene);
+        };
+
+        mainMenuBtnObj.GetComponent<Button_UI>().ClickFunc = () =>
+        {
+            Loader.Load(Loader.Scene.MainMenu);
         };
     }
 
