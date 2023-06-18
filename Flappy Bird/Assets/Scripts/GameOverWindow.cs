@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverWindow : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GameOverWindow : MonoBehaviour
 
         retryBtnObject.GetComponent<Button_UI>().ClickFunc = () =>
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+            Loader.Load(Loader.Scene.GameScene);
         };
     }
 
