@@ -6,12 +6,20 @@ using TMPro;
 
 public class ScoreWindow : MonoBehaviour
 {
-    [SerializeField] private GameObject scoreTextObject;
+    [SerializeField] private GameObject highscoreTextObj;
+    [SerializeField] private GameObject scoreTextObj;
+    private TMP_Text highscoreText;
     private TMP_Text scoreText;
 
     private void Awake()
     {
-        scoreText = scoreTextObject.GetComponent<TMP_Text>();
+        scoreText = scoreTextObj.GetComponent<TMP_Text>();
+        highscoreText = highscoreTextObj.GetComponent<TMP_Text>();
+    }
+
+    private void Start()
+    {
+        highscoreText.text = "HIGHSCORE: " + Score.GetHighscore().ToString();
     }
 
     private void Update()
