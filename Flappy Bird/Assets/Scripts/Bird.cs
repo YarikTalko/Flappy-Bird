@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using CodeMonkey;
 
 public class Bird : MonoBehaviour
 {
@@ -8,9 +7,9 @@ public class Bird : MonoBehaviour
 
     private static Bird instance;
 
-    public static Bird GetInstance() 
-    { 
-        return instance; 
+    public static Bird GetInstance()
+    {
+        return instance;
     }
 
     public event EventHandler OnDied;
@@ -29,7 +28,7 @@ public class Bird : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        birdRigidbody2D = GetComponent<Rigidbody2D>();    
+        birdRigidbody2D = GetComponent<Rigidbody2D>();
         birdRigidbody2D.bodyType = RigidbodyType2D.Static;
         state = State.WaitingToStart;
     }
@@ -55,6 +54,8 @@ public class Bird : MonoBehaviour
                 {
                     Jump();
                 }
+
+                transform.eulerAngles = new Vector3(0, 0, birdRigidbody2D.velocity.y * .25f);
                 break;
             case State.Dead:
                 break;
@@ -73,8 +74,8 @@ public class Bird : MonoBehaviour
     {
         birdRigidbody2D.bodyType = RigidbodyType2D.Static;
         SoundManager.PlaySound(SoundManager.Sound.Lose);
-        if (OnDied != null) 
-        { 
+        if (OnDied != null)
+        {
             OnDied(this, EventArgs.Empty);
         }
     }

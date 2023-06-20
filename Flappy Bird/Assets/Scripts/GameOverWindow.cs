@@ -31,12 +31,22 @@ public class GameOverWindow : MonoBehaviour
             Loader.Load(Loader.Scene.MainMenu);
         };
         mainMenuBtnObj.GetComponent<Button_UI>().AddButtonSounds();
+
+        transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 
     private void Start()
     {
         Bird.GetInstance().OnDied += Bird_OnDied;
         Hide();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Loader.Load(Loader.Scene.GameScene);
+        }
     }
 
     private void Bird_OnDied(object sender, System.EventArgs e)

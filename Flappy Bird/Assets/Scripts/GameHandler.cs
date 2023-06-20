@@ -12,3 +12,6 @@ public class GameHandler : MonoBehaviour
         Score.Start();
     }
 }
+
+//TODO: delete ended sounds
+//TODO: add upper border
